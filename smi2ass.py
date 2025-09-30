@@ -19,10 +19,11 @@
 #
 # Forked from: https://github.com/hojel/service.subtitles.gomtv/blob/3a7342961e140eaf8250659b0ac6158ce5e6bc5c/resources/lib
 
-import chardet, os, sys, re, html
+import chardet, os, sys, re
 from collections import defaultdict
 from operator import itemgetter
 from bs4 import BeautifulSoup
+import html
 
 major = sys.version_info.major
 minor = sys.version_info.minor
