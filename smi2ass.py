@@ -23,17 +23,7 @@ import chardet, os, sys, re
 from collections import defaultdict
 from operator import itemgetter
 from bs4 import BeautifulSoup
-import html
-
-major = sys.version_info.major
-minor = sys.version_info.minor
-
-if major == 3 and minor == 7:
-    import html
-elif major == 3 and minor < 7:
-    from html.parser import HTMLParser
-else:
-    print ('version 3.x needed') 
+from html.parser import HTMLParser
 
 default_lang_code = 'kor'
 default_font_name = 'sans-serif'
