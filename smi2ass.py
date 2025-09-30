@@ -19,20 +19,13 @@
 #
 # Forked from: https://github.com/hojel/service.subtitles.gomtv/blob/3a7342961e140eaf8250659b0ac6158ce5e6bc5c/resources/lib
 
-import chardet, os, sys, re
+import chardet, os, sys, re, html
 from collections import defaultdict
 from operator import itemgetter
 from bs4 import BeautifulSoup
 
 major = sys.version_info.major
 minor = sys.version_info.minor
-
-if major == 3 and minor == 7:
-    import html
-elif major == 3 and minor < 7:
-    from html.parser import HTMLParser
-else:
-    print ('version 3.x needed') 
 
 default_lang_code = 'kor'
 default_font_name = 'sans-serif'
