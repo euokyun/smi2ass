@@ -28,6 +28,13 @@ import html
 major = sys.version_info.major
 minor = sys.version_info.minor
 
+if major == 3 and minor == 7:
+    import html
+elif major == 3 and minor < 7:
+    from html.parser import HTMLParser
+else:
+    print ('version 3.x needed') 
+
 default_lang_code = 'kor'
 default_font_name = 'sans-serif'
 
