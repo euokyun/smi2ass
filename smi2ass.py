@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: UTF-8 -*-
 #
 # Copyright (C) 2018  Trustin Heuiseung Lee and other contributors
 #
@@ -19,11 +18,10 @@
 #
 # Forked from: https://github.com/hojel/service.subtitles.gomtv/blob/3a7342961e140eaf8250659b0ac6158ce5e6bc5c/resources/lib
 
-import chardet, os, sys, re
+import chardet, os, sys, re, html
 from collections import defaultdict
 from operator import itemgetter
 from bs4 import BeautifulSoup
-from html.parser import HTMLParser
 
 default_lang_code = 'kor'
 default_font_name = 'sans-serif'
@@ -255,7 +253,6 @@ def smi2ass(smi_sgml):
     return ass_dict
 
 def smi2ass_internal (sln):
-    global minor
     ass_lines = []
     for line_idx, item in enumerate(sln):
         try: # bad cases : '<SYNC .','<SYNC Start=479501??>'
@@ -338,11 +335,7 @@ def smi2ass_internal (sln):
 
             contents = p_tags.text
             contents = re.sub(r'smi2ass_unicode\(([0-9]+)\)', r'&#\1;', contents)
-            if minor == 7:
-                contents = html.unescape(contents)
-            else:
-                parser = HTMLParser()
-                contents = parser.unescape(contents)
+            contents = html.unescape(contents)
 
             if len(contents.strip()) != 0:
                 line = 'Dialogue: 0,%s,%s,Default,,0000,0000,0000,,%s\n' % (tcstart,tcend, contents)
