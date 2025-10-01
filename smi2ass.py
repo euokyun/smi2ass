@@ -273,13 +273,13 @@ def smi2ass_internal (sln):
 
             br = p_tags.find_all('br')
             for gg in br:
-                gg.replaceWith('\\N')
+                gg.replace_with('\\N') # Changed to replace_with
 
             bold = p_tags.find_all('b')
             for bo in bold:
                 if len(bo.text) != 0:
                     boldre = '{\\b1}'+bo.text+'{\\b0}'
-                    bo.replaceWith(boldre)
+                    bo.replace_with(BeautifulSoup(boldre, 'html.parser')) # Changed to replace_with
                 else:
                     bo.extract()
 
@@ -287,7 +287,7 @@ def smi2ass_internal (sln):
             for it in italics:
                 if len(it.text) != 0:
                     itre = '{\\i1}'+it.text+'{\\i0}'
-                    it.replaceWith(itre)
+                    it.replace_with(BeautifulSoup(itre, 'html.parser')) # Changed to replace_with
                 else:
                     it.extract()
 
@@ -295,7 +295,7 @@ def smi2ass_internal (sln):
             for un in underlines:
                 if len(un.text) != 0:
                     unre = '{\\u1}'+un.text+'{\\u0}'
-                    un.replaceWith(unre)
+                    un.replace_with(BeautifulSoup(unre, 'html.parser')) # Changed to replace_with
                 else:
                     un.extract()
 
@@ -303,7 +303,7 @@ def smi2ass_internal (sln):
             for st in strikes:
                 if len(st.text) != 0:
                     stre = '{\\s1}'+st.text+'{\\s0}'
-                    st.replaceWith(stre)
+                    st.replace_with(BeautifulSoup(stre, 'html.parser')) # Changed to replace_with
                 else:
                     st.extract()
 
@@ -311,7 +311,7 @@ def smi2ass_internal (sln):
             for rt in ruby_tags:
                 if len(rt.text) != 0:
                     rt_re = '{\\fscx50}{\\fscy50}&nbsp;'+rt.text+'&nbsp;{\\fscx100}{\\fscy100}'
-                    rt.replaceWith(rt_re)
+                    rt.replace_with(BeautifulSoup(rt_re, 'html.parser')) # Changed to replace_with
                 else:
                     rt.extract()
 
@@ -331,7 +331,7 @@ def smi2ass_internal (sln):
                         except: # bad cases : 'skybule'
                             converted_color = color.text
                             print('Failed to convert a color name: %s' % color['color'].lower())
-                    color.replaceWith(converted_color)
+                    color.replace_with(BeautifulSoup(converted_color, 'html.parser')) # Changed to replace_with
 
             contents = p_tags.text
             contents = re.sub(r'smi2ass_unicode\(([0-9]+)\)', r'&#\1;', contents)
